@@ -93,7 +93,8 @@
         <div class="dashboard-layout fade-in">
             <!-- Sidebar -->
             <nav class="sidebar glass-panel">
-                <div class="user-profile-section">
+            <button class="hidden-desktop" onclick="toggleSidebar()" style="position:absolute; top:20px; right:20px; background:none; border:none; color:white; font-size:1.5rem; z-index:1001;"><i class="fas fa-times"></i></button>
+            <div class="user-profile-section">
                     <div class="profile-layout">
                         <div class="profile-pic-box" onclick="triggerProfileUpload()">
                             <span id="profile-initials"><i class="fas fa-camera"></i></span>
@@ -120,6 +121,7 @@
             <!-- Main Content -->
             <main class="main-content">
                 <header class="glass-panel-header">
+                    <button id="mobile-menu-btn" onclick="toggleSidebar()" class="hidden-desktop"><i class="fas fa-bars"></i></button>
                     <h2 id="page-title">Dashboard</h2>
                     <div class="header-right">
                         <div class="date-time" id="clock">00:00:00</div>

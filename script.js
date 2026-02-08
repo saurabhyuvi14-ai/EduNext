@@ -486,8 +486,19 @@ function updateClock() {
 }
 
 // --- NAVIGATION & DOM ---
+// --- MOBILE NAVIGATION ---
+function toggleSidebar() {
+    document.querySelector('.sidebar').classList.toggle('active');
+}
+
 // --- NAVIGATION & DOM ---
 function showSection(sectionId) {
+    // Close sidebar on mobile if open
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar && sidebar.classList.contains('active')) {
+        sidebar.classList.remove('active');
+    }
+
     if (sectionId === 'admin' && currentUser.role !== 'admin') {
         alert("Restricted Access");
         return;

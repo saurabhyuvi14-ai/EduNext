@@ -714,3 +714,102 @@ header {
     background: white;
     /* For PDF readability */
 }
+
+/* --- Responsive Mobile Design --- */
+.hidden-desktop {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .hidden-desktop {
+        display: block;
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+
+    .dashboard-layout {
+        flex-direction: column;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 260px;
+        background: rgba(10, 14, 39, 0.98);
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding-top: 60px;
+        /* Space for close button if added or top spacing */
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+        box-shadow: 5px 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .main-content {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .glass-panel-header {
+        padding: 1rem;
+        gap: 1rem;
+        justify-content: flex-start;
+    }
+
+    #page-title {
+        font-size: 1.4rem;
+    }
+
+    .date-time {
+        font-size: 0.8rem;
+    }
+
+    /* Auto-hide sidebar if clicking outside not implemented, user must close */
+
+    /* Stack Grids */
+    .dashboard-grid,
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .daily-quote {
+        text-align: left;
+    }
+
+    .subject-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .tabs {
+        flex-wrap: wrap;
+    }
+
+    /* Doubts Layout */
+    .doubt-layout {
+        flex-direction: column !important;
+    }
+
+    .ask-doubt-col,
+    .view-doubt-col {
+        width: 100%;
+    }
+}

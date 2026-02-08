@@ -62,9 +62,7 @@ EduNext is a comprehensive, web-based academic management platform designed to s
 ## 🔑 Default Credentials
 The system comes pre-seeded with a default set of users and a main controller.
 
-### System Controller (Boss)
-- **ID**: `14607688`
-- **Password**: `NST@123`
+
 
 ### Students & CRs
 - **User IDs**: Generated based on USNs (e.g., `2102508701` to `2102508825`).
@@ -74,7 +72,7 @@ The system comes pre-seeded with a default set of users and a main controller.
 ## 📱 Usage Guide
 1. **Login**: Use the credentials above to log in.
 2. **Dashboard**: 
-   - **Home**: View welcome message and tech facts. (For Boss: View Registry).
+   - **Home**: View welcome message and tech facts. 
    - **Academics**: Browse subjects and view/download materials.
    - **Doubts**: Ask questions or help others (if CR).
    - **Manage Content (CR only)**: Upload new resources.

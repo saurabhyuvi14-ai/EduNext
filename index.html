@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduNext Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Premium Font: Outfit for a modern, clean look -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="background-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+    
+    <div id="app">
+        <!-- Views injected here -->
+    </div>
+
+    <!-- 1. LOGIN VIEW -->
+    <template id="view-login">
+        <div class="login-container fade-in">
+            <h1 class="brand-logo">EduNext</h1>
+            <p class="brand-tagline">Empowering the Future</p>
+            
+            <div class="role-selection">
+                <button class="role-btn active" data-role="student" onclick="selectRole('student')">
+                    Student
+                </button>
+                <button class="role-btn" data-role="cr" onclick="selectRole('cr')">
+                    CR
+                </button>
+            </div>
+            
+            <div class="login-card glass-panel">
+                <h2 id="login-title">Student</h2>
+                <form id="login-form">
+                    <div class="input-group">
+                        <i class="fas fa-id-badge"></i>
+                        <input type="text" id="login-id" placeholder="Enter USN" required autocomplete="off">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="login-pass" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="cyber-btn">Access Portal</button>
+                </form>
+                <p class="status-msg" id="login-msg"></p>
+
+                <a href="#" onclick="showForgotPasswordMsg()" class="forgot-pass">Trouble Logging In?</a>
+            </div>
+        </div>
+    </template>
+
+    <!-- 2. CHANGE PASSWORD VIEW -->
+    <template id="view-setup">
+        <div class="setup-container fade-in">
+            <div class="setup-card glass-panel">
+                <div class="icon-circle">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h2>Security Setup</h2>
+                <p>Welcome to EduNext. Please set a secure password for your account.</p>
+                <form id="setup-form">
+                    <div class="input-group">
+                        <label>User ID</label>
+                        <input type="text" id="setup-username" readonly class="readonly-input">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>New Password</label>
+                        <input type="password" id="setup-new-pass" placeholder="Create new password" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Confirm Password</label>
+                        <input type="password" id="setup-confirm-pass" placeholder="Repeat password" required>
+                    </div>
+
+                    <button type="submit" class="cyber-btn">Secure Account</button>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <!-- 3. DASHBOARD VIEW -->
+    <template id="view-dashboard">
+        <div class="dashboard-layout fade-in">
+            <!-- Sidebar -->
+            <nav class="sidebar glass-panel">
+                <div class="user-profile-section">
+                    <div class="profile-layout">
+                        <div class="profile-pic-box" onclick="triggerProfileUpload()">
+                            <span id="profile-initials"><i class="fas fa-camera"></i></span>
+                            <img id="profile-img-preview" class="hidden" src="" alt="Profile">
+                        </div>
+                        <div class="user-info">
+                            <h3 id="dash-username">User</h3>
+                            <span id="dash-usn">USN</span>
+                        </div>
+                    </div>
+                    <span id="dash-role" class="role-badge">STUDENT</span>
+                    <input type="file" id="profile-upload-input" hidden accept="image/*" onchange="handleProfileUpload(event)">
+                </div>
+                
+                <ul class="nav-links">
+                    <li onclick="showSection('dashboard')" class="active"><i class="fas fa-home"></i> Home</li>
+                    <li onclick="showSection('subjects')"><i class="fas fa-book"></i> Academics</li>
+                    <li onclick="showSection('doubts')"><i class="fas fa-comments"></i> Doubts</li>
+                    <li id="nav-upload" class="hidden" onclick="showSection('upload')"><i class="fas fa-cloud-upload-alt"></i> Manage Content</li>
+                    <li onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Sign Out</li>
+                </ul>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <header class="glass-panel-header">
+                    <h2 id="page-title">Dashboard</h2>
+                    <div class="header-right">
+                        <div class="date-time" id="clock">00:00:00</div>
+                    </div>
+                </header>
+
+                <div id="content-area">
+                    
+                    <!-- HOME SECTION -->
+                    <div id="section-dashboard" class="section active">
+                        <div class="welcome-banner glass-panel">
+                            <div>
+                                <h1>Hello, <span id="dash-welcome-name">Student</span></h1>
+                                <p>Welcome to your digital campus.</p>
+                            </div>
+                            <div class="daily-quote" id="tech-quote">
+                                "Loading inspiration..."
+                            </div>
+                        </div>
+
+                        <!-- Personal Details Form -->
+                        <div id="personal-details-panel" class="glass-panel section-panel">
+                            <h3><i class="fas fa-id-card"></i> Personal Profile</h3>
+                            <form id="details-form" class="details-grid">
+                                <div class="input-group">
+                                    <label>Display Name</label>
+                                    <input type="text" id="detail-name" placeholder="Full Name" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Age</label>
+                                    <input type="number" id="detail-age" placeholder="Age">
+                                </div>
+                                <div class="input-group">
+                                    <label>Phone Contact</label>
+                                    <input type="tel" id="detail-phone" placeholder="Mobile Number">
+                                </div>
+                                <button type="submit" class="cyber-btn small-btn">Save Changes</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- SUBJECTS SECTION -->
+                    <div id="section-subjects" class="section hidden">
+                         <div id="subject-detail-view" class="hidden">
+                             <button class="back-btn" onclick="showSubjectList()"><i class="fas fa-chevron-left"></i> Back to Subjects</button>
+                             <div class="subject-header">
+                                 <h2 id="selected-subject-title">Mathematics</h2>
+                                 <div class="tabs">
+                                    <button class="tab-btn active" onclick="switchTab('materials')">Materials</button>
+                                    <button class="tab-btn" onclick="switchTab('assignments')">Assignments</button>
+                                    <button class="tab-btn" onclick="switchTab('practice')">Practice</button>
+                                    <button class="tab-btn" onclick="switchTab('contest')">Contests</button>
+                                </div>
+                             </div>
+                            <div id="subject-content-list" class="glass-panel tab-content-area"></div>
+                        </div>
+
+                        <div id="subject-grid" class="dashboard-grid">
+                            <div class="course-card glass-panel" onclick="openSubject('Maths')">
+                                <div class="icon-box c1"><i class="fas fa-calculator"></i></div>
+                                <h3>Mathematics</h3>
+                            </div>
+                            <div class="course-card glass-panel" onclick="openSubject('Physics')">
+                                <div class="icon-box c2"><i class="fas fa-atom"></i></div>
+                                <h3>Physics</h3>
+                            </div>
+                            <div class="course-card glass-panel" onclick="openSubject('SNW')">
+                                <div class="icon-box c3"><i class="fas fa-network-wired"></i></div>
+                                <h3>SNW</h3>
+                            </div>
+                            <div class="course-card glass-panel" onclick="openSubject('PSP')">
+                                <div class="icon-box c4"><i class="fas fa-code"></i></div>
+                                <h3>PSP</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DOUBTS SECTION -->
+                    <div id="section-doubts" class="section hidden">
+                        <div class="glass-panel full-height">
+                            <div class="doubt-layout">
+                                <div class="ask-doubt-col">
+                                    <h3>Ask a Question</h3>
+                                    <form id="doubt-form">
+                                        <div class="input-group">
+                                            <label>Subject</label>
+                                            <select id="doubt-subject-select" required></select>
+                                        </div>
+                                        <div class="input-group">
+                                            <label>Query</label>
+                                            <textarea id="doubt-text" placeholder="Describe your doubt..." required></textarea>
+                                        </div>
+                                        <div class="input-group">
+                                            <label>Reference Link</label>
+                                            <input type="text" id="doubt-link" placeholder="http://...">
+                                        </div>
+                                        <div class="file-upload-wrapper">
+                                            <button type="button" class="upload-trigger" onclick="document.getElementById('doubt-file').click()">
+                                                <i class="fas fa-paperclip"></i> Attach Image
+                                            </button>
+                                            <input type="file" id="doubt-file" hidden accept="image/*">
+                                            <span id="file-name-display"></span>
+                                        </div>
+                                        <button type="submit" class="cyber-btn">Post Query</button>
+                                    </form>
+                                </div>
+                                <div class="view-doubt-col">
+                                    <h3>Recent Discussions</h3>
+                                    <div id="doubts-list"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- UPLOAD SECTION -->
+                    <div id="section-upload" class="section hidden">
+                         <div class="glass-panel upload-center">
+                             <h3><i class="fas fa-upload"></i> Upload Resources</h3>
+                             <div class="role-badge large-badge">Subject: <span id="upload-subject-badge">MATHS</span></div>
+                             
+                             <form id="upload-form">
+                                 <div class="input-group">
+                                     <label>Category</label>
+                                     <select id="upload-category">
+                                         <option value="materials">Study Material</option>
+                                         <option value="assignments">Assignment</option>
+                                         <option value="practice">Practice Question</option>
+                                         <option value="contest">Contest</option>
+                                     </select>
+                                 </div>
+                                 <div class="input-group">
+                                     <label>Title</label>
+                                     <input type="text" id="upload-title" placeholder="Resource Title" required>
+                                 </div>
+                                    <div class="input-group">
+                                    <label>Link (URL)</label>
+                                    <input type="text" id="upload-link" placeholder="Google Drive / YouTube Link">
+                                </div>
+                                <div class="input-group">
+                                    <label>Upload File (PDF, Image, etc.)</label>
+                                    <input type="file" id="upload-file" accept=".pdf, .jpg, .jpeg, .png, .gif, .webp, .txt, .doc, .docx">
+                                </div>
+                                 <button type="submit" class="cyber-btn">Publish Content</button>
+                             </form>
+                             <div id="upload-status"></div>
+                         </div>
+                    </div>
+
+                    <!-- ADMIN SECTION -->
+                    <div id="section-admin" class="section hidden">
+                        <div class="glass-panel full-height">
+                            <h2>System Registry</h2>
+                            <div class="table-frame">
+                                <table class="tech-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>User Details</th>
+                                            <th>Role</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-user-table">
+                                        <!-- Rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </template>
+
+    <!-- 4. GENERIC FILE VIEWER MODAL -->
+    <div id="file-viewer-modal" class="modal-overlay hidden" oncontextmenu="return false;">
+        <div class="modal-content glass-panel">
+            <button class="modal-close" onclick="closeFileViewer()"><i class="fas fa-times"></i></button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

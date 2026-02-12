@@ -1,0 +1,14 @@
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+
+# Environment Variables
+.env
+
+# Build Artifacts
+dist/
+build/

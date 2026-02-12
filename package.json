@@ -1,0 +1,26 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "EduNext is a comprehensive, web-based academic management platform designed to streamline interaction between students, Class Representatives (CRs), and administrators (\"Boss\"). It features a modern, responsive interface for sharing study materials, resolving academic doubts, and managing user profiles.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saurabhyuvi14-ai/EduNext.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/saurabhyuvi14-ai/EduNext/issues"
+  },
+  "homepage": "https://github.com/saurabhyuvi14-ai/EduNext#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1"
+  }
+}

@@ -7,7 +7,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
-app.use(express.static(path.join(__dirname))); // Serve client files from root or specific folder
+
+// Serve client files from root
+app.use(express.static(path.join(__dirname)));
 
 // Endpoint to provide safe env vars to client
 app.get('/api/config', (req, res) => {

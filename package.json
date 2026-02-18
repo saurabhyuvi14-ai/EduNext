@@ -4,7 +4,8 @@
   "description": "EduNext is a comprehensive, web-based academic management platform designed to streamline interaction between students, Class Representatives (CRs), and administrators (\"Boss\"). It features a modern, responsive interface for sharing study materials, resolving academic doubts, and managing user profiles.",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
